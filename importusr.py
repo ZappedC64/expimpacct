@@ -2,6 +2,27 @@
 import os
 import subprocess
 import sys
+import shutil
+from datetime import datetime
+
+# Must be run as root or sudo.
+if not os.geteuid() == 0:
+    sys.exit('This script must be run as root (or sudo)!')
+
+# Backup existing files
+print 'Backing up existing files... ',
+try:
+    backup_date = datetime.now().strftime('%Y%m%d%H%M%S')
+    str_passwd = '/etc/passwd'
+    str_group = '/etc/group'
+    str_shadow = '/etc/shadow'
+    shutil.copy2(str_passwd, str_passwd + '.' + backup_date + '.bak' )
+    shutil.copy2(str_group, str_group + '.' + backup_date + '.bak' )
+    shutil.copy2(str_shadow, str_shadow + '.' + backup_date + '.bak' )
+    print '[ OK ]'
+except Exception, e:
+    print '[ ERROR ]'
+    sys.exit(1)
 
 
 # Check if the user already exists in the /etc/passwd file
