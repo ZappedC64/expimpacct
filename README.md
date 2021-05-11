@@ -9,7 +9,6 @@ project. I'm learning Python as I find programs that I need.
 
 To do:
 - Encrypt/Password protect the exported tar file
-- Backup destination server's existing /etc/{passwd/group/shadow} files
 - Add more text to the program as it runs
 
 How to use....
